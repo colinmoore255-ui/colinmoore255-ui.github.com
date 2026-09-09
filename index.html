@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#87ceeb">
+  <title>Sigma Games | Play beyond the block</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section id="menu" class="menu-screen">
+    <header class="menu-header"><a class="brand" href="#top"><span class="brand-mark">Σ</span> SIGMA<span class="brand-dot">.</span>GAMES</a><nav><a class="active" href="#library">Library</a><a href="#daily">Daily drop</a><a href="#about">About</a></nav><div class="header-actions"><button id="themeButton" type="button" title="Change theme">◐</button><button id="settingsButton" type="button" title="Open settings">⚙</button><span class="profile">SG&nbsp; Guest player</span></div></header>
+    <main id="top">
+      <section class="hero-section"><div class="hero-copy"><p class="eyebrow"><span class="live-dot"></span> THE INTERNET'S SIDE QUEST</p><h1>Play beyond<br><em>the block.</em></h1><p class="intro">A sharp little arcade for big breaks. No downloads, no drama, just games that hit.</p><div class="hero-actions"><button class="primary-button" id="heroPlay" type="button">▶ &nbsp; Play featured</button><a class="text-button" href="#library">Browse library ↘</a></div></div><div class="hero-art"><span class="hero-label">FEATURED // 001</span><div class="hero-panel"><span>VOXELCRAFT</span><b>BUILD<br><em>YOUR</em><br>WORLD</b><div class="voxel-road">◆ &nbsp; ◆ &nbsp; ◆</div><small>SURVIVAL SANDBOX · READY</small></div><span class="hero-sticker">NO<br>ADS<br>★</span></div></section>
+      <section class="stats-row"><div><strong>08</strong><span>games in rotation</span></div><div><strong>0</strong><span>downloads required</span></div><div><strong>∞</strong><span>ways to kill 5 mins</span></div><div class="status"><i></i> All systems playful</div></section>
+      <section id="library" class="library-section"><div class="section-heading"><div><p class="eyebrow">01 / PICK YOUR POISON</p><h2>The library</h2></div><label class="search-box">⌕ <input id="searchInput" type="search" placeholder="Find a game"></label></div><div class="category-row"><button class="category active" data-category="all">All games <span>08</span></button><button class="category" data-category="arcade">Arcade <span>03</span></button><button class="category" data-category="puzzle">Puzzle <span>02</span></button><button class="category" data-category="chill">Chill <span>02</span></button><button class="category" data-category="competitive">Competitive <span>01</span></button></div><div id="gameGrid" class="game-grid"></div><p id="emptyState" class="empty-state hidden">No games match that search.</p></section>
+      <section id="daily" class="daily-section"><div><p class="eyebrow">02 / DAILY DROP</p><h2>One fresh thing<br><em>every day.</em></h2><p>Small games, strong opinions. The daily drop changes at midnight, local time.</p><button class="outline-button" type="button">Try today's drop ↗</button></div><div class="daily-ticket"><small>TUE / 08.09.26</small><strong>WORD<br><em>SURGE</em></strong><span>5 MIN / SOLO &nbsp; ★★★★★</span><b>NEW<br>★</b></div></section>
+      <footer id="about"><div class="brand"><span class="brand-mark">Σ</span> SIGMA.GAMES</div><p>Made for the in-between moments.</p><div class="footer-links"><a href="#library">Library</a><a href="#daily">Daily drop</a><a href="mailto:hello@sigmagames.local">Contact</a></div><small>© 2026 SIGMA</small></footer>
+    </main>
+    <aside id="settingsPanel" class="settings-panel hidden"><strong>QUICK SETTINGS</strong><button id="settingsClose" type="button">×</button><label>Dark mode <input id="darkToggle" type="checkbox"></label><label>Reduce motion <input id="motionToggle" type="checkbox"></label><label>Compact cards <input id="compactToggle" type="checkbox"></label></aside>
+  </section>
+  <main id="gameShell" class="hidden">
+    <canvas id="game" aria-label="VoxelCraft game"></canvas>
+    <div id="crosshair" aria-hidden="true"></div>
+    <div id="hud">
+      <div class="info"><strong>VOXELCRAFT</strong><br>Click to play · WASD move · Space jump<br>Left click mine · Right click place · 1-8 select</div>
+      <div id="hotbar" aria-label="Block selection"></div>
+      <div id="toast" role="status"></div>
+      <div id="roomBadge" class="room-badge hidden">ROOM <strong id="roomCodeHud"></strong></div>
+    </div>
+    <div id="start" class="start-screen">
+      <div class="voxel-menu"><p class="voxel-kicker">SIGMA GAMES PRESENTS</p><h1>VOXELCRAFT</h1><p class="voxel-subtitle">A blocky adventure</p><div class="voxel-menu-buttons"><button id="startButton" type="button" class="voxel-primary">Start game</button><button id="multiplayerButton" type="button">Multiplayer · New world</button><button id="joinMenuButton" type="button">Join with code</button><button id="gameSettingsButton" type="button">Settings</button></div><p class="voxel-hint">WASD move · Space jump · Mouse look</p></div>
+    </div>
+    <div id="multiplayerModal" class="game-modal hidden"><div class="game-dialog"><button class="dialog-close" data-game-close="multiplayerModal">×</button><h2>Multiplayer</h2><p>Play with another tab or window using the same room code.</p><input id="roomCode" maxlength="10" placeholder="ROOM CODE"><div class="dialog-actions"><button id="createRoom" class="voxel-primary">Create room</button><button id="joinRoom">Join room</button></div><div id="roomStatus" class="room-status">Not connected</div></div></div>
+    <div id="gameSettingsModal" class="game-modal hidden"><div class="game-dialog"><button class="dialog-close" data-game-close="gameSettingsModal">×</button><h2>Settings</h2><label>Mouse sensitivity <input id="gameSensitivity" type="range" min=".001" max=".005" step=".0001" value=".0022"><output id="gameSensitivityValue">2.2</output></label><label>Field of view <input id="gameFov" type="range" min="60" max="110" value="75"><output id="gameFovValue">75°</output></label><label>Invert Y axis <input id="gameInvertY" type="checkbox"></label><label>Quality <select id="gameQuality"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select></label><label>Skin <select id="skinSelect"><option value="green">Explorer</option><option value="orange">Builder</option><option value="blue">Miner</option><option value="purple">Ranger</option></select></label></div></div>
+    <button id="chatToggle" class="chat-toggle hidden" type="button">Chat <span>[T]</span></button><section id="chatPanel" class="chat-panel hidden"><header>World chat <button id="chatClose" type="button">×</button></header><div id="chatMessages" class="chat-messages"><p class="system-message">Chat is ready.</p></div><form id="chatForm"><input id="chatInput" maxlength="160" autocomplete="off" placeholder="Write a message..."><button type="submit">Send</button></form></section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
